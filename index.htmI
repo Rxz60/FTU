@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>آلة التشفير الافتراضية 💀</title>
+
+<style>
+body{
+margin:0;
+background:black;
+color:#00ff88;
+font-family: monospace;
+direction: rtl;
+}
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-1;
+}
+.container{
+text-align:center;
+padding:20px;
+}
+textarea{
+width:80%;
+height:120px;
+margin:10px;
+background:black;
+color:#00ff88;
+border:1px solid #00ff88;
+}
+button{
+padding:10px 15px;
+margin:5px;
+background:#00ff88;
+border:none;
+cursor:pointer;
+color:black;
+}
+h1,h2{color:#00ff88}
+</style>
+</head>
+
+<body>
+
+<canvas id="m"></canvas>
+
+<div class="container">
+
+<h1>💀 آلة التشفير الافتراضية VM</h1>
+
+<h2>🔐 التشفير</h2>
+<textarea id="in"></textarea><br>
+<button onclick="enc()">تشفير</button>
+<textarea id="out"></textarea>
+
+<h2>🔓 فك التشفير</h2>
+<textarea id="in2"></textarea><br>
+<button onclick="dec()">فك التشفير</button>
+<textarea id="out2"></textarea>
+
+</div>
+
+<script>
+// MATRIX
+const c=document.getElementById("m");
+const x=c.getContext("2d");
+c.width=innerWidth;
+c.height=innerHeight;
+
+let ch="01█▓▒░☠☣✶✧✬✪✷✹✺";
+ch=ch.split("");
+let d=[];
+for(let i=0;i<120;i++) d[i]=1;
+
+function draw(){
+x.fillStyle="rgba(0,0,0,0.05)";
+x.fillRect(0,0,c.width,c.height);
+x.fillStyle="#0f0";
+
+for(let i=0;i<d.length;i++){
+let t=ch[Math.random()*ch.length|0];
+x.fillText(t,i*10,d[i]*10);
+if(d[i]*10>c.height)d[i]=0;
+d[i]++;
+}}
+setInterval(draw,25);
+
+// أدوات عشوائية
+function r(n){
+let c="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+let s="";
+for(let i=0;i<n;i++) s+=c[Math.random()*c.length|0];
+return s;
+}
+
+// =======================
+// 🔐 VM ENCRYPTOR
+// =======================
+function enc(){
+
+let code=document.getElementById("in").value;
+
+// طبقات تشفير
+let s=btoa(unescape(encodeURIComponent(code)));
+s=s.split("").reverse().join("");
+s=btoa(s);
+s=[...s].map(x=>x.charCodeAt(0)+13).join("~");
+s=btoa(s);
+s=s.split("").reverse().join("");
+
+let A=r(6),B=r(6);
+
+let vm = `
+-- ☠ آلة افتراضية مشفرة ☠
+return(function()
+
+local ${A}="${s}"
+
+local function VM(bytecode)
+
+bytecode=bytecode:reverse()
+bytecode=atob(bytecode)
+
+local out=""
+for v in string.gmatch(bytecode,"[^~]+") do
+out=out..string.char(tonumber(v)-13)
+end
+
+out=atob(out:reverse())
+
+-- تنفيذ
+return (loadstring or load)(out)()
+end
+
+return VM(${A})
+
+end)()
+`;
+
+document.getElementById("out").value=vm;
+}
+
+// =======================
+// 🔓 VM DECODER
+// =======================
+function dec(){
+
+try{
+let s=document.getElementById("in2").value;
+
+let m=s.match(/"([^"]+)"/)[1];
+
+m=m.split("").reverse().join("");
+m=atob(m);
+
+let t="";
+m.split("~").forEach(x=>{
+t+=String.fromCharCode(x-13);
+});
+
+t=atob(t.split("").reverse().join(""));
+t=decodeURIComponent(escape(atob(t)));
+
+document.getElementById("out2").value=t;
+
+}catch{
+document.getElementById("out2").value="❌ فشل فك التشفير";
+}
+}
+</script>
+
+</body>
+</html>
