@@ -1,0 +1,353 @@
+local CONFIG = {
+
+    AUTO_STEAL_NEAREST = true, 
+
+}
+
+local Players = game:GetService("Players")
+
+local RunService = game:GetService("RunService")
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local TweenService = game:GetService("TweenService")
+
+local LocalPlayer = Players.LocalPlayer
+
+local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
+
+local allAnimalsCache = {}
+
+local IsStealing = false
+
+local AUTO_STEAL_PROX_RADIUS = 7
+
+if setclipboard then
+
+    setclipboard("https://discord.gg/eS4fgMazxy")
+
+end
+
+local screenGui = Instance.new("ScreenGui")
+
+screenGui.Name = "Sa | alone ag"
+
+screenGui.ResetOnSpawn = false
+
+screenGui.DisplayOrder = 999999
+
+screenGui.Parent = PlayerGui
+
+local mainContainer = Instance.new("Frame")
+
+mainContainer.Size = UDim2.new(0, 360, 0, 100) 
+
+mainContainer.Position = UDim2.new(0.5, -180, 1, -210)
+
+mainContainer.BackgroundColor3 = Color3.fromRGB(15, 10, 25)
+
+mainContainer.BackgroundTransparency = 0.15
+
+mainContainer.BorderSizePixel = 0
+
+mainContainer.Parent = screenGui
+
+local containerCorner = Instance.new("UICorner")
+
+containerCorner.CornerRadius = UDim.new(0, 18)
+
+containerCorner.Parent = mainContainer
+
+local containerStroke = Instance.new("UIStroke")
+
+containerStroke.Thickness = 1.5
+
+containerStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+containerStroke.Parent = mainContainer
+
+local strokeGradient = Instance.new("UIGradient")
+
+strokeGradient.Color = ColorSequence.new({
+
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(160, 100, 255)),
+
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 180, 255))
+
+})
+
+strokeGradient.Parent = containerStroke
+
+local titleLabel = Instance.new("TextLabel")
+
+titleLabel.Size = UDim2.new(0, 200, 0, 38)
+
+titleLabel.Position = UDim2.new(0, 20, 0, 12)
+
+titleLabel.BackgroundTransparency = 1
+
+titleLabel.Text = "كود مفكوك التشفير من SA | ALONE"
+
+titleLabel.TextColor3 = Color3.fromRGB(230, 210, 255)
+
+titleLabel.Font = Enum.Font.GothamSemibold
+
+titleLabel.TextSize = 26
+
+titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+titleLabel.Parent = mainContainer
+
+local statusFrame = Instance.new("Frame")
+
+statusFrame.Size = UDim2.new(0, 100, 0, 26)
+
+statusFrame.Position = UDim2.new(1, -120, 0, 18)
+
+statusFrame.BackgroundColor3 = Color3.fromRGB(25, 20, 45)
+
+statusFrame.Parent = mainContainer
+
+local statusCorner = Instance.new("UICorner")
+
+statusCorner.CornerRadius = UDim.new(1, 0)
+
+statusCorner.Parent = statusFrame
+
+local statusText = Instance.new("TextLabel")
+
+statusText.Size = UDim2.new(1, 0, 1, 0)
+
+statusText.BackgroundTransparency = 1
+
+statusText.Text = "مفعل"
+
+statusText.TextColor3 = Color3.fromRGB(180, 150, 255)
+
+statusText.Font = Enum.Font.GothamMedium
+
+statusText.TextSize = 13
+
+statusText.Parent = statusFrame
+
+local barBg = Instance.new("Frame")
+
+barBg.Size = UDim2.new(0, 320, 0, 4)
+
+barBg.Position = UDim2.new(0, 20, 0, 72)
+
+barBg.BackgroundColor3 = Color3.fromRGB(35, 30, 50)
+
+barBg.BorderSizePixel = 0
+
+barBg.Parent = mainContainer
+
+local barCorner = Instance.new("UICorner")
+
+barCorner.CornerRadius = UDim.new(1, 0)
+
+barCorner.Parent = barBg
+
+local barFill = Instance.new("Frame")
+
+barFill.Size = UDim2.new(0, 0, 1, 0)
+
+barFill.BackgroundColor3 = Color3.fromRGB(0, 190, 255)
+
+barFill.BorderSizePixel = 0
+
+barFill.Parent = barBg
+
+local fillCorner = Instance.new("UICorner")
+
+fillCorner.CornerRadius = UDim.new(1, 0)
+
+fillCorner.Parent = barFill
+
+local function getHRP()
+
+    local char = LocalPlayer.Character
+
+    return char and (char:FindFirstChild("HumanoidRootPart") or char:FindFirstChild("UpperTorso"))
+
+end
+
+local function isMyBase(plotName)
+
+    local plot = workspace.Plots:FindFirstChild(plotName)
+
+    local sign = plot and plot:FindFirstChild("PlotSign")
+
+    local yourBase = sign and sign:FindFirstChild("YourBase")
+
+    return yourBase and yourBase:IsA("BillboardGui") and yourBase.Enabled == true
+
+end
+
+local function scanPlots()
+
+    allAnimalsCache = {}
+
+    local plots = workspace:FindFirstChild("Plots")
+
+    if not plots then return end
+
+    for _, plot in ipairs(plots:GetChildren()) do
+
+        if not isMyBase(plot.Name) then
+
+            local podiums = plot:FindFirstChild("AnimalPodiums")
+
+            if podiums then
+
+                for _, podium in ipairs(podiums:GetChildren()) do
+
+                    if podium:IsA("Model") and podium:FindFirstChild("Base") then
+
+                        table.insert(allAnimalsCache, {
+
+                            plot = plot.Name, 
+
+                            slot = podium.Name, 
+
+                            worldPosition = podium:GetPivot().Position
+
+                        })
+
+                    end
+
+                end
+
+            end
+
+        end
+
+    end
+
+end
+
+local function animateSteal()
+
+    statusText.Text = "جاري السرقة"
+
+    statusText.TextColor3 = Color3.fromRGB(200, 100, 255)
+
+    
+
+    barFill.Size = UDim2.new(0, 0, 1, 0)
+
+    TweenService:Create(barFill, TweenInfo.new(0.28, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(1, 0, 1, 0)}):Play()
+
+    
+
+    task.wait(0.28)
+
+    
+
+    statusText.Text = "مفعل"
+
+    statusText.TextColor3 = Color3.fromRGB(180, 150, 255)
+
+    barFill.Size = UDim2.new(0, 0, 1, 0)
+
+end
+
+local function executeSteal(prompt)
+
+    if IsStealing then return end
+
+    IsStealing = true
+
+    
+
+    animateSteal()
+
+    
+
+    local holdConns = getconnections(prompt.PromptButtonHoldBegan)
+
+    local trigConns = getconnections(prompt.Triggered)
+
+    
+
+    for _, c in ipairs(holdConns) do 
+
+        task.spawn(c.Function) 
+
+    end
+
+    for _, c in ipairs(trigConns) do 
+
+        task.spawn(c.Function) 
+
+    end
+
+    
+
+    task.delay(0.3, function()
+
+        IsStealing = false
+
+    end)
+
+end
+
+RunService.Heartbeat:Connect(function()
+
+    if not IsStealing then
+
+        local hrp = getHRP()
+
+        if not hrp then return end
+
+        
+
+        for _, animal in ipairs(allAnimalsCache) do
+
+            if (hrp.Position - animal.worldPosition).Magnitude <= AUTO_STEAL_PROX_RADIUS then
+
+                local plot = workspace.Plots:FindFirstChild(animal.plot)
+
+                local podium = plot and plot.AnimalPodiums:FindFirstChild(animal.slot)
+
+                local attach = podium and podium.Base.Spawn:FindFirstChild("PromptAttachment")
+
+                if attach then
+
+                    local p = attach:FindFirstChildOfClass("ProximityPrompt")
+
+                    if p then 
+
+                        task.spawn(executeSteal, p) 
+
+                        break 
+
+                    end
+
+                end
+
+            end
+
+        end
+
+    end
+
+end)
+
+task.spawn(function()
+
+    while true do 
+
+        scanPlots() 
+
+        task.wait(5) 
+
+    end
+
+end)
+
+scanPlots()
+
+mainContainer.BackgroundTransparency = 1
+
+TweenService:Create(mainContainer, TweenInfo.new(0.4), {BackgroundTransparency = 0.15}):Play()
