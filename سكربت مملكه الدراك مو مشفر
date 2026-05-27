@@ -20,15 +20,21 @@ local Window = Libary:MakeWindow({
     Flags = "DRAK_Brookhaven"
 })
 
-Window:AddMinimizeButton({
+local RunService = game:GetService("RunService")
+
+local i = Window:AddMinimizeButton({
     Button = {
-        Image = "rbxassetid://139728907242563",
+        Image = "rbxthumb://type=Asset&w=420&h=420&id=122201451072603",
         BackgroundTransparency = 0
     },
     Corner = {
         CornerRadius = UDim.new(35, 1)
     }
-})
+}).Button:FindFirstChildWhichIsA("ImageLabel")
+
+RunService.Heartbeat:Connect(function(dt)
+    i.Rotation = (i.Rotation + 100 * dt) % 360
+end)
 
 local InfoTab = Window:MakeTab({
     Title = "المعلومات",
