@@ -25,6 +25,8 @@ local Window = Library:MakeWindow({
     Flags = "DRAK_Brookhaven"
 })
 
+local MainFrame = Window
+
 Window:AddMinimizeButton({
     Button = {
         Image = "rbxassetid://90383972870592",
@@ -46,15 +48,14 @@ RunService.Heartbeat:Connect(function(deltaTime)
 	end
 end)
 
-local LeftCrown = Create("ImageLabel", MainFrame, {
-    Name = "LeftCrown",
-    Size = UDim2.fromOffset(90, 90),
-    Position = UDim2.new(0, -15, 0, -50),
-    BackgroundTransparency = 1,
-    Image = "rbxassetid://133741598643758",
-    Rotation = 0,
-    ZIndex = 20
-})
+local LeftCrown = Instance.new("ImageLabel")
+LeftCrown.Parent = MainFrame
+LeftCrown.Name = "LeftCrown"
+LeftCrown.Size = UDim2.fromOffset(90,90)
+LeftCrown.Position = UDim2.new(0,-15,0,-50)
+LeftCrown.BackgroundTransparency = 1
+LeftCrown.Image = "rbxassetid://133741598643758"
+LeftCrown.ZIndex = 20
 
 RunService.Heartbeat:Connect(function(deltaTime)
 	for _,v in ipairs(game.CoreGui:GetDescendants()) do
