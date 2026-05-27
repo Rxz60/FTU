@@ -25,10 +25,15 @@ local Window = Library:MakeWindow({
     Flags = "DRAK_Brookhaven"
 })
 
+local RunService = game:GetService("RunService")
+local CoreGui = game:GetService("CoreGui")
+
 RunService.Heartbeat:Connect(function(deltaTime)
-	for _,v in ipairs(game.CoreGui:GetDescendants()) do
-		if v:IsA("ImageButton") and v.Image == "rbxassetid://90383972870592" then
-			v.Rotation = v.Rotation + 400 * deltaTime
+	for _, v in ipairs(CoreGui:GetDescendants()) do
+		if v:IsA("ImageButton") then
+			if v.Image == "rbxassetid://90383972870592" then
+				v.Rotation = v.Rotation + (90 * deltaTime)
+			end
 		end
 	end
 end)
