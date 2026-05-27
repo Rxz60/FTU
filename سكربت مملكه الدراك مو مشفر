@@ -46,6 +46,16 @@ RunService.Heartbeat:Connect(function(deltaTime)
 	end
 end)
 
+local LeftCrown = Create("ImageLabel", MainFrame, {
+    Name = "LeftCrown",
+    Size = UDim2.fromOffset(90, 90),
+    Position = UDim2.new(0, -15, 0, -50),
+    BackgroundTransparency = 1,
+    Image = "rbxassetid://133741598643758",
+    Rotation = 0,
+    ZIndex = 20
+})
+
 RunService.Heartbeat:Connect(function(deltaTime)
 	for _,v in ipairs(game.CoreGui:GetDescendants()) do
 		if v:IsA("ImageButton") and v.Image == "rbxassetid://90383972870592" then
