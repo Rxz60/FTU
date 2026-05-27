@@ -26,33 +26,33 @@ local Window = Library:MakeWindow({
 })
 
 local RunService = game:GetService("RunService")
+local CoreGui = game:GetService("CoreGui")
 
-local Hub = game.CoreGui:FindFirstChild("Hub")
+local Hub = CoreGui:FindFirstChild("Hub")
 
-local Toggle = Instance.new("ImageButton")
-Toggle.Parent = game.CoreGui
-Toggle.Name = "ToggleButton"
-Toggle.Size = UDim2.new(0,45,0,45)
-Toggle.Position = UDim2.new(0,10,0.5,-22)
-Toggle.BackgroundTransparency = 1
-Toggle.Image = "rbxassetid://90383972870592"
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Parent = CoreGui
+ScreenGui.ResetOnSpawn = false
 
-local Corner = Instance.new("UICorner")
-Corner.Parent = Toggle
-Corner.CornerRadius = UDim.new(1,0)
+local Button = Instance.new("ImageButton")
+Button.Parent = ScreenGui
+Button.Size = UDim2.new(0,30,0,30)
+Button.Position = UDim2.new(0,5,0.5,-15)
+Button.BackgroundTransparency = 1
+Button.Image = "rbxassetid://90383972870592"
+
+local UICorner = Instance.new("UICorner")
+UICorner.Parent = Button
+UICorner.CornerRadius = UDim.new(1,0)
 
 RunService.Heartbeat:Connect(function(deltaTime)
-	Toggle.Rotation = Toggle.Rotation + (90 * deltaTime)
-end)
-
-Toggle.MouseButton1Click:Connect(function()
-	if Hub then
-		Hub.Visible = not Hub.Visible
-	end
+	Button.Rotation = Button.Rotation + (90 * deltaTime)
 end)
 
 Button.MouseButton1Click:Connect(function()
-	MainFrame.Visible = not MainFrame.Visible
+	if Hub then
+		Hub.Visible = not Hub.Visible
+	end
 end)
 
 local InfoTab = Window:MakeTab({
