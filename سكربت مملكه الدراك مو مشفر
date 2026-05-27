@@ -31,6 +31,7 @@ local CoreGui = game:GetService("CoreGui")
 local Hub = CoreGui:FindFirstChild("Hub")
 
 local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "ToggleGui"
 ScreenGui.Parent = CoreGui
 ScreenGui.ResetOnSpawn = false
 
@@ -50,7 +51,10 @@ RunService.Heartbeat:Connect(function(deltaTime)
 end)
 
 Button.MouseButton1Click:Connect(function()
+	Hub = CoreGui:FindFirstChild("Hub")
+
 	if Hub then
+		Hub.Enabled = not Hub.Enabled
 		Hub.Visible = not Hub.Visible
 	end
 end)
