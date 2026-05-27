@@ -4,26 +4,26 @@ task.wait(3)
 
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
+
 local player = Players.LocalPlayer
 local username = player.Name
 local displayName = player.DisplayName
 local userId = player.UserId
-local thumb = Players:GetUserThumbnailAsync(userId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size420x420)
+
+local thumb = Players:GetUserThumbnailAsync(
+	userId,
+	Enum.ThumbnailType.HeadShot,
+	Enum.ThumbnailSize.Size420x420
+)
 
 local Library = loadstring(game:HttpGet("https://pastefy.app/ZqcmTdjS/raw"))()
 
-local Window = Libary:MakeWindow({
-    Title = "سكربت  مملكه الدراك",
+local Window = Library:MakeWindow({
+    Title = "سكربت مملكه الدراك",
     SubTitle = "MR HUB TEAM",
     LoadText = "DRAKHubDevelopers",
     Flags = "DRAK_Brookhaven"
 })
-
-local RunService = game:GetService("RunService")
-
-
-
-local RunService = game:GetService("RunService")
 
 RunService.Heartbeat:Connect(function(deltaTime)
 	for _,v in ipairs(game.CoreGui:GetDescendants()) do
