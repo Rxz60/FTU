@@ -28,12 +28,18 @@ local Window = Library:MakeWindow({
 local RunService = game:GetService("RunService")
 local CoreGui = game:GetService("CoreGui")
 
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Parent = CoreGui
+
+local Button = Instance.new("ImageButton")
+Button.Parent = ScreenGui
+Button.Size = UDim2.new(0, 60, 0, 60)
+Button.Position = UDim2.new(0, 20, 0.5, -30)
+Button.BackgroundTransparency = 1
+Button.Image = "rbxassetid://90383972870592"
+
 RunService.Heartbeat:Connect(function(deltaTime)
-	for _, v in ipairs(CoreGui:GetDescendants()) do
-		if v:IsA("ImageButton") and v.Image == "rbxassetid://90383972870592" then
-			v.Rotation = v.Rotation + (90 * deltaTime)
-		end
-	end
+	Button.Rotation = Button.Rotation + (90 * deltaTime)
 end)
 
 local InfoTab = Window:MakeTab({
