@@ -46,6 +46,8 @@ RunService.Heartbeat:Connect(function(deltaTime)
 	end
 end)
 
+task.wait(1)
+
 local MainFrame = game.CoreGui:FindFirstChild("Hub", true)
 
 if MainFrame then
