@@ -40,7 +40,7 @@ if not GlowImage then
     GlowImage.Parent = Button.Button
     GlowImage.Size = UDim2.fromScale(1, 1)
     GlowImage.BackgroundTransparency = 1
-    GlowImage.Image = "rbxthumb://type=Asset&w=420&h=420&id=122201451072603"
+    GlowImage.Image = "rbxthumb://type=Asset&w=420&h=420&id=102918311585700"
 end
 
 RunService.Heartbeat:Connect(function(dt)
