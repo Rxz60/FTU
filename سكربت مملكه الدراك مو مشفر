@@ -21,7 +21,9 @@ local Window = Libary:MakeWindow({
 
 local RunService = game:GetService("RunService")
 
-local i = Window:AddMinimizeButton({
+local RunService = game:GetService("RunService")
+
+local Button = Window:AddMinimizeButton({
     Button = {
         Image = "rbxthumb://type=Asset&w=420&h=420&id=122201451072603",
         BackgroundTransparency = 0
@@ -29,10 +31,20 @@ local i = Window:AddMinimizeButton({
     Corner = {
         CornerRadius = UDim.new(35, 1)
     }
-}).Button:FindFirstChildWhichIsA("ImageLabel")
+})
+
+local GlowImage = Button.Button:FindFirstChildOfClass("ImageLabel")
+
+if not GlowImage then
+    GlowImage = Instance.new("ImageLabel")
+    GlowImage.Parent = Button.Button
+    GlowImage.Size = UDim2.fromScale(1, 1)
+    GlowImage.BackgroundTransparency = 1
+    GlowImage.Image = "rbxthumb://type=Asset&w=420&h=420&id=122201451072603"
+end
 
 RunService.Heartbeat:Connect(function(dt)
-    i.Rotation = (i.Rotation + 100 * dt) % 360
+    GlowImage.Rotation = GlowImage.Rotation + 300 * dt
 end)
 
 local InfoTab = Window:MakeTab({
