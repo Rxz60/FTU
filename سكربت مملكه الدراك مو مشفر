@@ -25,37 +25,29 @@ local Window = Library:MakeWindow({
     Flags = "DRAK_Brookhaven"
 })
 
+MinimizeButton({
+    Image = "rbxassetid://90383972870592",
+    Size = {30,30},
+    Color = Color3.fromRGB(255,255,255),
+    Corner = true,
+    Stroke = false,
+    StrokeColor = Color3.fromRGB(0,0,0),
+
+    Callback = function()
+        local Hub = game.CoreGui:FindFirstChild("Hub")
+        if Hub then
+            Hub.Visible = not Hub.Visible
+        end
+    end
+})
+
 local RunService = game:GetService("RunService")
-local CoreGui = game:GetService("CoreGui")
-
-local Hub = CoreGui:FindFirstChild("Hub")
-
-local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "ToggleGui"
-ScreenGui.Parent = CoreGui
-ScreenGui.ResetOnSpawn = false
-
-local Button = Instance.new("ImageButton")
-Button.Parent = ScreenGui
-Button.Size = UDim2.new(0,30,0,30)
-Button.Position = UDim2.new(0,5,0.5,-15)
-Button.BackgroundTransparency = 1
-Button.Image = "rbxassetid://90383972870592"
-
-local UICorner = Instance.new("UICorner")
-UICorner.Parent = Button
-UICorner.CornerRadius = UDim.new(1,0)
 
 RunService.Heartbeat:Connect(function(deltaTime)
-	Button.Rotation = Button.Rotation + (90 * deltaTime)
-end)
-
-Button.MouseButton1Click:Connect(function()
-	Hub = CoreGui:FindFirstChild("Hub")
-
-	if Hub then
-		Hub.Enabled = not Hub.Enabled
-		Hub.Visible = not Hub.Visible
+	for _,v in ipairs(game.CoreGui:GetDescendants()) do
+		if v:IsA("ImageButton") and v.Image == "rbxassetid://90383972870592" then
+			v.Rotation = v.Rotation + (90 * deltaTime)
+		end
 	end
 end)
 
