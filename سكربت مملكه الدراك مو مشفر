@@ -25,6 +25,8 @@ local Window = Library:MakeWindow({
     Flags = "DRAK_Brookhaven"
 })
 
+local RunService = game:GetService("RunService")
+
 MinimizeButton({
     Image = "rbxassetid://90383972870592",
     Size = {30,30},
@@ -35,13 +37,25 @@ MinimizeButton({
 
     Callback = function()
         local Hub = game.CoreGui:FindFirstChild("Hub")
+
+        if not Hub then
+            for _,v in ipairs(game.CoreGui:GetDescendants()) do
+                if v.Name == "Hub" then
+                    Hub = v
+                    break
+                end
+            end
+        end
+
         if Hub then
-            Hub.Visible = not Hub.Visible
+            if Hub:IsA("ScreenGui") then
+                Hub.Enabled = not Hub.Enabled
+            else
+                Hub.Visible = not Hub.Visible
+            end
         end
     end
 })
-
-local RunService = game:GetService("RunService")
 
 RunService.Heartbeat:Connect(function(deltaTime)
 	for _,v in ipairs(game.CoreGui:GetDescendants()) do
