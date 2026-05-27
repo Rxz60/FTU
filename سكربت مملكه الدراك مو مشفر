@@ -10,11 +10,11 @@ local displayName = player.DisplayName
 local userId = player.UserId
 local thumb = Players:GetUserThumbnailAsync(userId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size420x420)
 
-local Libary = loadstring(game:HttpGet("https://pastefy.app/rKyUR9Km/raw"))()
+local Libary = loadstring(game:HttpGet("https://pastefy.app/i7OMc9HX/raw"))()
 
 local Window = Libary:MakeWindow({
     Title = "سكربت  مملكه الدراك",
-    SubTitle = "BY DRAK TEAM",
+    SubTitle = "MR HUB TEAM",
     LoadText = "DRAKHubDevelopers",
     Flags = "DRAK_Brookhaven"
 })
