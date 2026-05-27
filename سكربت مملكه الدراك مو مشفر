@@ -10,7 +10,7 @@ local displayName = player.DisplayName
 local userId = player.UserId
 local thumb = Players:GetUserThumbnailAsync(userId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size420x420)
 
-local Library = loadstring(game:HttpGet("https://pastefy.app/f2CIUebH/raw"))()
+local Library = loadstring(game:HttpGet("https://pastefy.app/ZqcmTdjS/raw"))()
 
 local Window = Libary:MakeWindow({
     Title = "سكربت  مملكه الدراك",
