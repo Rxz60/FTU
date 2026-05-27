@@ -26,14 +26,11 @@ local Window = Library:MakeWindow({
 })
 
 local RunService = game:GetService("RunService")
-local CoreGui = game:GetService("CoreGui")
 
 RunService.Heartbeat:Connect(function(deltaTime)
-	for _, v in ipairs(CoreGui:GetDescendants()) do
-		if v:IsA("ImageButton") then
-			if v.Image == "rbxassetid://90383972870592" then
-				v.Rotation = v.Rotation + (90 * deltaTime)
-			end
+	for _,v in pairs(game.CoreGui:GetDescendants()) do
+		if v:IsA("ImageButton") and v.Image == "rbxassetid://90383972870592" then
+			v.Rotation = v.Rotation + (90 * deltaTime)
 		end
 	end
 end)
