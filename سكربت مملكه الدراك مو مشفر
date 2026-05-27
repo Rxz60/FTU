@@ -25,37 +25,30 @@ local Window = Library:MakeWindow({
     Flags = "DRAK_Brookhaven"
 })
 
-local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 
-local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Parent = Players.LocalPlayer:WaitForChild("PlayerGui")
-ScreenGui.ResetOnSpawn = false
+local Hub = game.CoreGui:FindFirstChild("Hub")
 
-local MainFrame = Instance.new("Frame")
-MainFrame.Parent = ScreenGui
-MainFrame.Size = UDim2.new(0,460,0,290)
-MainFrame.Position = UDim2.new(0.5,-230,0.5,-145)
-MainFrame.BackgroundColor3 = Color3.fromRGB(30,30,30)
-MainFrame.Visible = false
+local Toggle = Instance.new("ImageButton")
+Toggle.Parent = game.CoreGui
+Toggle.Name = "ToggleButton"
+Toggle.Size = UDim2.new(0,45,0,45)
+Toggle.Position = UDim2.new(0,10,0.5,-22)
+Toggle.BackgroundTransparency = 1
+Toggle.Image = "rbxassetid://90383972870592"
 
-local UICorner1 = Instance.new("UICorner")
-UICorner1.Parent = MainFrame
-UICorner1.CornerRadius = UDim.new(0,15)
-
-local Button = Instance.new("ImageButton")
-Button.Parent = ScreenGui
-Button.Size = UDim2.new(0,45,0,45)
-Button.Position = UDim2.new(0,10,0.5,-22)
-Button.BackgroundTransparency = 1
-Button.Image = "rbxassetid://90383972870592"
-
-local UICorner2 = Instance.new("UICorner")
-UICorner2.Parent = Button
-UICorner2.CornerRadius = UDim.new(1,0)
+local Corner = Instance.new("UICorner")
+Corner.Parent = Toggle
+Corner.CornerRadius = UDim.new(1,0)
 
 RunService.Heartbeat:Connect(function(deltaTime)
-	Button.Rotation = Button.Rotation + (90 * deltaTime)
+	Toggle.Rotation = Toggle.Rotation + (90 * deltaTime)
+end)
+
+Toggle.MouseButton1Click:Connect(function()
+	if Hub then
+		Hub.Visible = not Hub.Visible
+	end
 end)
 
 Button.MouseButton1Click:Connect(function()
