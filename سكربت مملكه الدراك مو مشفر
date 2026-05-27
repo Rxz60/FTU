@@ -1,5 +1,4 @@
 --اقوى سكربت  في العالم
-loadstring(game:HttpGet('https://pastefy.app/epJvoe0j/raw'))()
 
 task.wait(3)
 
