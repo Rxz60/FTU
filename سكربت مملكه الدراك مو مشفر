@@ -22,18 +22,15 @@ local Window = Libary:MakeWindow({
 local RunService = game:GetService("RunService")
 
 
+
+local RunService = game:GetService("RunService")
+
 RunService.Heartbeat:Connect(function(deltaTime)
-	for _,v in pairs(game.CoreGui:GetDescendants()) do
+	for _,v in ipairs(game.CoreGui:GetDescendants()) do
 		if v:IsA("ImageButton") and v.Image == "rbxassetid://90383972870592" then
-			v.Rotation = v.Rotation + (90 * deltaTime)
+			v.Rotation = v.Rotation + 400 * deltaTime
 		end
 	end
-end)
-
-local GlowImage = Button.Button:FindFirstChildOfClass("ImageLabel")
-
-RunService.Heartbeat:Connect(function(dt)
-    GlowImage.Rotation = GlowImage.Rotation + 300 * dt
 end)
 
 local InfoTab = Window:MakeTab({
