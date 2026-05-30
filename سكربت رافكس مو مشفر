@@ -11,41 +11,44 @@ local PlayerMouse = Player:GetMouse()
 local redzlib = {
     Themes = {
         Darker = {
-            ["Color Hub 1"] = ColorSequence.new({
-                ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 0, 0)),
-                ColorSequenceKeypoint.new(0.50, Color3.fromRGB(10, 10, 10)),
-                ColorSequenceKeypoint.new(1.00, Color3.fromRGB(20, 20, 20))
-            }),
-            ["Color Hub 2"] = Color3.fromRGB(0, 0, 0),
+    ["Color Hub 1"] = ColorSequence.new({
+        ColorSequenceKeypoint.new(0.00, Color3.fromRGB(20, 0, 0)),
+        ColorSequenceKeypoint.new(0.50, Color3.fromRGB(80, 0, 0)),
+        ColorSequenceKeypoint.new(1.00, Color3.fromRGB(20, 0, 0))
+    }),
 
-            ["Color Stroke"] = Color3.fromRGB(255, 255, 255), -- الحواف أبيض
-            ["Color Theme"] = Color3.fromRGB(0, 0, 0), -- خلفية سوداء
+    ["Color Hub 2"] = Color3.fromRGB(10, 0, 0),
 
-            ["Color Text"] = Color3.fromRGB(255, 255, 255), -- نص أبيض
-            ["Color Dark Text"] = Color3.fromRGB(220, 220, 220),
+    ["Color Stroke"] = Color3.fromRGB(100, 0, 0), -- لمعة الحواف
 
-            ["Color Button"] = Color3.fromRGB(25, 25, 25), -- أزرار غامقة
-            ["Color TextBox"] = Color3.fromRGB(30, 30, 30), -- TextBox غامق
-        },
+    ["Color Theme"] = Color3.fromRGB(25, 0, 0), -- الخلفية
 
-        Dark = {
-            ["Color Hub 1"] = ColorSequence.new({
-                ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 0, 0)),
-                ColorSequenceKeypoint.new(0.50, Color3.fromRGB(15, 15, 15)),
-                ColorSequenceKeypoint.new(1.00, Color3.fromRGB(30, 30, 30))
-            }),
-            ["Color Hub 2"] = Color3.fromRGB(0, 0, 0),
+    ["Color Text"] = Color3.fromRGB(255, 255, 255),
+    ["Color Dark Text"] = Color3.fromRGB(220, 220, 220),
 
-            ["Color Stroke"] = Color3.fromRGB(255, 255, 255), -- الحواف أبيض
-            ["Color Theme"] = Color3.fromRGB(0, 0, 0), -- خلفية سوداء
+    ["Color Button"] = Color3.fromRGB(45, 0, 0), -- الأزرار
+    ["Color TextBox"] = Color3.fromRGB(35, 0, 0),
+},
 
-            ["Color Text"] = Color3.fromRGB(255, 255, 255),
-            ["Color Dark Text"] = Color3.fromRGB(200, 200, 200),
+Dark = {
+    ["Color Hub 1"] = ColorSequence.new({
+        ColorSequenceKeypoint.new(0.00, Color3.fromRGB(20, 0, 0)),
+        ColorSequenceKeypoint.new(0.50, Color3.fromRGB(80, 0, 0)),
+        ColorSequenceKeypoint.new(1.00, Color3.fromRGB(20, 0, 0))
+    }),
 
-            ["Color Button"] = Color3.fromRGB(35, 35, 35),
-            ["Color TextBox"] = Color3.fromRGB(40, 40, 40),
-        },
-    },
+    ["Color Hub 2"] = Color3.fromRGB(10, 0, 0),
+
+    ["Color Stroke"] = Color3.fromRGB(100, 0, 0), -- لمعة الحواف
+
+    ["Color Theme"] = Color3.fromRGB(25, 0, 0),
+
+    ["Color Text"] = Color3.fromRGB(255, 255, 255),
+    ["Color Dark Text"] = Color3.fromRGB(200, 200, 200),
+
+    ["Color Button"] = Color3.fromRGB(45, 0, 0),
+    ["Color TextBox"] = Color3.fromRGB(35, 0, 0),
+},
 
 
 	Info = {
