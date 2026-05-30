@@ -1118,14 +1118,14 @@ local WindowBackground = Create("ImageLabel", MainFrame, {
     Size = UDim2.new(1, 0, 1, 0),
     Position = UDim2.new(0, 0, 0, 0),
     BackgroundTransparency = 1,
-    Image = "rbxassetid://99328210847285",
+    Image = "rbxassetid://",
     ImageTransparency = 0.0,
     ScaleType = Enum.ScaleType.Crop,
     ZIndex = 0
 })
 Make("Corner", WindowBackground)
 
--- الحواف أبيض وأسود
+-- الحواف احمر
 local Stroke = Create("UIStroke", MainFrame, {
     Color = Color3.fromRGB(255, 255, 255),
     Thickness = 2.5,
@@ -1182,7 +1182,7 @@ local GlowImage = Create("ImageLabel", MainFrame, {
     Size = UDim2.fromOffset(20, 20),
     Position = UDim2.new(0, 2, 0, 0),
     BackgroundTransparency = 1,
-    Image = "rbxassetid://92104411067431",
+    Image = "rbxthumb://type=Asset&w=420&h=420&id=111656425434955",
     ImageTransparency = 0,
     ZIndex = 10
 })
